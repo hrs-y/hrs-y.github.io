@@ -16,25 +16,24 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            overflow: hidden; /* 隱藏超出邊界的內容，避免出現滾動條 */
+            overflow: hidden;
         }
         header {
             width: 100%;
             padding: 20px;
             box-sizing: border-box;
             text-align: left;
-             display: flex;
+            display: flex;
             justify-content: space-between;
-            align-items: center; /*讓 header 的元素垂直居中*/
+            align-items: center;
         }
         header h1 {
             margin: 0;
             font-size: 2rem;
         }
-         .blog-link-container{
+        .blog-link-container{
             display: flex;
         }
-
         .blog-link {
             color: #D4D4D4;
             text-decoration: none;
@@ -45,7 +44,7 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-             justify-content: center;
+            justify-content: center;
             align-items: center;
             text-align: center;
             padding: 20px;
@@ -57,10 +56,12 @@
             overflow: hidden;
             border-right: .15em solid #D4D4D4;
             margin-bottom: 15px;
+            line-height: 1.4; /* 行高 */
         }
         .typing-text-sm {
             font-size: 1.2rem;
             margin-bottom: 20px;
+             line-height: 1.4; /* 行高 */
             white-space: nowrap;
             overflow: hidden;
             border-right: .15em solid #D4D4D4;
@@ -68,6 +69,7 @@
          .btn-container {
           display: flex;
           align-items: center;
+          margin-top: 10px; /* 按鈕容器增加上邊距 */
         }
         .btn {
             background-color: #007ACC;
@@ -80,6 +82,8 @@
            display: inline-flex;
             align-items: center;
             transition: background-color 0.3s ease;
+             font-size: 1rem;
+
         }
         .btn:hover {
             background-color: #005ea8;
@@ -102,13 +106,17 @@
             justify-content: space-between;
             font-size: 0.9rem;
         }
+         footer a {
+               color: #87CEFA;
+         }
+
         /* 關鍵字掉落動畫 */
         .keyword {
             position: absolute;
             top: -20px;
             font-family: 'Courier New', monospace;
             white-space: nowrap;
-            animation: fall 3s linear forwards; /* 使用 forwards 讓動畫結束時不跳回起始狀態 */
+            animation: fall 3s linear forwards;
             font-size: 1.2rem;
         }
 
@@ -123,12 +131,11 @@
             }
         }
 
-
         /* 針對手機螢幕的樣式調整 */
         @media (max-width: 768px) {
            header {
               flex-direction: column;
-              align-items: center; /*讓手機版header的元素垂直居中*/
+              align-items: center;
             }
            header h1 {
                 font-size: 1.5rem;
@@ -140,23 +147,37 @@
              }
             .blog-link {
                 margin-left: 0;
-                margin-top: 5px; /*間距調整*/
+                margin-top: 8px; /*間距調整*/
             }
             .typing-text {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
             .typing-text-sm {
                 font-size: 1rem;
-                margin-bottom: 15px;
+                 margin-bottom: 15px;
             }
             footer {
               flex-direction: column;
               text-align: center;
-              font-size: 0.8rem;
+              font-size: 0.7rem;
+              padding: 10px;
             }
             footer p:first-child{
-              margin-bottom: 5px;
+              margin-bottom: 10px;
             }
+             main {
+                padding: 20px 15px;
+            }
+             .btn {
+                padding: 12px 24px; /* 加大按鈕 padding */
+                font-size: 1.1rem;
+                border-radius: 8px;
+             }
+              .github-icon {
+              width: 24px;
+              height: 24px;
+              margin-left: 10px;
+             }
         }
     </style>
 </head>
@@ -178,7 +199,7 @@
         </div>
     </main>
     <footer>
-        <p>My GitHub: <a href="https://github.com/hrs-y" style="color: #D4D4D4;" target="_blank">https://github.com/hrs-y</a></p>
+        <p>My GitHub: <a href="https://github.com/hrs-y"  target="_blank">https://github.com/hrs-y</a></p>
         <p>© 2025 Harrison. All rights reserved.</p>
     </footer>
     <script>
@@ -210,21 +231,45 @@
             type();
         }
          function createFallingKeyword() {
-            const keyword = document.createElement('div');
-            keyword.classList.add('keyword');
-            keyword.textContent = keywords[Math.floor(Math.random() * keywords.length)];
-            keyword.style.left = `${Math.random() * 100}%`;
+            if (window.innerWidth > 768) {
+                  const keyword = document.createElement('div');
+             keyword.classList.add('keyword');
+             keyword.textContent = keywords[Math.floor(Math.random() * keywords.length)];
+             keyword.style.left = `${Math.random() * 100}%`;
+             keyword.style.color = keywordColors[Math.floor(Math.random() * keywordColors.length)];
+             keyword.style.fontSize = `${Math.random() * 0.8 + 1}rem`; // 隨機調整字體大小
+              const animationDuration = Math.random() * 3 + 2; // 隨機調整動畫時間
+              keyword.style.animationDuration = `${animationDuration}s`;
+             keyword.style.animationDelay = `-${Math.random() * animationDuration}s`; // 添加隨機動畫延遲
+             main.appendChild(keyword);
+
+            keyword.addEventListener('animationend', () => {
+              keyword.remove();
+            });
+            }
+            else{
+               //手機螢幕邏輯
+             const keyword = document.createElement('div');
+             keyword.classList.add('keyword');
+             keyword.textContent = keywords[Math.floor(Math.random() * keywords.length)];
+              // 設定關鍵字的左右邊界
+              const containerWidth = main.offsetWidth;
+              const keywordWidth = 80; // 你可以根據實際情況調整關鍵字的最大寬度
+              const randomLeft = Math.random() * (containerWidth - keywordWidth);
+
+              keyword.style.left = `${randomLeft}px`;
             keyword.style.color = keywordColors[Math.floor(Math.random() * keywordColors.length)];
-            keyword.style.fontSize = `${Math.random() * 0.8 + 1}rem`; // 隨機調整字體大小
+            keyword.style.fontSize = `${Math.random() * 0.7 + 0.8}rem`; // 隨機調整字體大小
              const animationDuration = Math.random() * 3 + 2; // 隨機調整動畫時間
             keyword.style.animationDuration = `${animationDuration}s`;
             keyword.style.animationDelay = `-${Math.random() * animationDuration}s`; // 添加隨機動畫延遲
             main.appendChild(keyword);
 
-           keyword.addEventListener('animationend', () => {
+            keyword.addEventListener('animationend', () => {
                keyword.remove();
             });
-       }
+          }
+         }
 
         typeWriter(titleZhElement, titleZh, 70);
         setTimeout(() => {
