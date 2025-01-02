@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harrison's Portfolio</title>
+    <style>
+        /* Visual Studio 配色方案 */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1E1E1E;
+            color: #D4D4D4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden; /* 隱藏超出邊界的內容，避免出現滾動條 */
+        }
+        header {
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: left;
+             display: flex;
+            justify-content: space-between;
+            align-items: center; /*讓 header 的元素垂直居中*/
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+         .blog-link-container{
+            display: flex;
+        }
+
+        .blog-link {
+            color: #D4D4D4;
+            text-decoration: none;
+            margin-left: 15px;
+            font-size: 0.9rem;
+        }
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+             justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+        .typing-text {
+            font-size: 2.5rem;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: .15em solid #D4D4D4;
+            margin-bottom: 15px;
+        }
+        .typing-text-sm {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: .15em solid #D4D4D4;
+        }
+         .btn-container {
+          display: flex;
+          align-items: center;
+        }
+        .btn {
+            background-color: #007ACC;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+           display: inline-flex;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #005ea8;
+        }
+        .github-icon {
+            width: 20px;
+            height: 20px;
+            margin-left: 10px;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJ3aGl0ZSI+PHBhdGggZD0iTTEyIDAuMjc1Yy02LjYyNCAwLTEyIDUuMzc2LTEyIDEyYzAgNS4zMDQgMy40MzggOS44MDQgOC4yMDQgMTEuMzQ2YTAuNjMuNjMgMCAwIDAgLjA5NS4wMTNsMS42MzUtLjI2M2EuNTEzLjUxMyAwIDAgMC41MzUtLjU1OGwtLjU3Ni0xLjgzN2MtMS44MTkuMjA0LTMuNjYyLS43ODQtNC4yMzgtMS41NzRhMS40MzIgMS40MzIgMCAwIDEtLjcxNC0xLjM4N2guMDA1YS40MjQuNDI0IDAgMCAxLS4wMy0uMDYzdi0uMDAxYTAuMjgzLjI4MyAwIDAgMS4wMDktLjIzOWwuMDAyLS4wMDFjMS4wMTEgMCAxLjgyMy0uMzUgMi42MzUtMS4wNDdsLjA5OC0uMDg4Yy4xMjEtLjExLjM1Ni0uMDcuNDc2LjA0Mi4xMi4xMTkuMDcuMzU3LS4wNDIuNDc3LS41MjUuNDQ0LTEuMTI2Ljc0NS0xLjc0Ni43NDVjLTIuNjI0IDAtNC43NDYtMi4xMjMtNC43NDYtNC43NDdjMC0xLjQ1My41MTktMi44MDggMS4zNjYtMy44NDlhLjQyLjQyIDAgMCAwLS4xMzctLjQ0OC0uNDY2LjQ2NiAwIDAgMC0uMDQ0LS4zMzJjLS40NTYtLjEwMS0xLjMyMy41MS0xLjYyNC44NjYtLjMwMS4zNTYtLjcwNS40ODYtMS4yOTkuNDg2LS41OTUgMC0uOTk4LS4xMy0xLjI5OS0uNDg2LS4yOTUtLjM1Ni0xLjE2Mi0uOTY3LTEuNjIzLS44NjYtLjAyNy4wMTctLjA1Mi4wMzctLjA3OC4wNTdjLS4wNDkuMDQ5LS4wOTkuMDkzLS4xNDguMTM4LS4wOTQuMDg3LS4xMzkuMTc4LS4xMzkuMjgzIDAgMS4wNDguMTQ5IDIuMDQxLjY2MyAyLjk4NC42NjYuOTY0IDEuOTk5IDEuNTcyIDMuMjUzIDEuNzY4YTUuOTY0IDUuOTY0IDAgMCAwIDAuNTIzIDAuMDY5Yy40NS4wODMuODk5LjA1NyAxLjMzLS4wMzRjLTIuOTM5IDAtNS4zMDItMi4zNjMtNS4zMDItNS4zMDJjMC0xLjI2Ni40ODQtMi40MDcgMS4zMjEtMy4yOTcuMjg0LS4yNjcuNDQ3LS42MTMuNDI1LS45NzJjLS4wMjItLjM1OC0uMTI2LS42NjMtLjI1MS0uOTIzLjI0Ny0uMjU3LjU1Mi0uNDUzLjc4Ni0uNjU2LjI0Ni0uMjE0LjUzOC0uMzg4LjczMS0uNTI4IDEuMDU5LS41NzUgMi40ODItLjg0IDMuODcyLS44NDJjMS40MDYgMC0yLjgzMy4yNjgtMi45MjcgLjc0OC4yNS4yMTcuNTQyLjM4OS44MTcuNTk4LjIxLjE1LjM5OC4yNS42MjcuMzEuMjQ3LjA2LjUxNy4wNzYuNzU0LjA3Ni4zMTUgMCAuNjE1LS4wMi44OTMtLjA2Yy4yNDctLjAwMi40NjUtLjE4LjcwNS0uMjc0Yy4yMS0uMDc4LjM1NC0uMjg0LjU0Ni0uNDU2LjE5Mi0uMTc0LjI4Ni0uNDEyLjI1Ny0uNjQzLS4wMzUtLjIzMi0uMTg2LS40MDUtLjM5MS0uNTUzLjY5NS0uNjE4IDEuNTQyLS45MjMgMi40OTktLjkzMnYtLjg1OWMuMDY5LjAwOS4xNDguMDQyLjIxNC4xMTlsLjAwMS0uMDAxYy41ODguNTcxLjgzMyAxLjI3Mi44MTMgMS45NzMuMDAzLjY3Mi0uMjUxIDEuMzIzLS43MjIgMS44OTMtLjQ4Mi41NzMtMS4xMjkgMS4wODItMS44MzIgMS4zMzUtLjcxNC4yNTItMS40NzIuMzk0LTIuMjU1LjM5NWMtLjQ1NyAwLS44OTMtLjAwNy0xLjI5Ni0uMDIzdi0uMDEyYy0uMDI3IDAtLjA1NC0uMDAyLS4wODItLjAwNC0uMDA2IDAtLjAwOCAwLS4wMTUgMGwtLjAwOCAwYy0uMDE1IDAtLjAzIDAtLjA0NS0uMDA1bC0uMDAzLS4wMDEtLjE2OS0uMDIxLS4wNTQuMDEyLS4wNzQuMDE2LS4xMTQuMDI1bC0uMDk2LjA0Yy0uMDAzIDAtLjAwNiAwLS4wMDkgMC0uMDEzIDAtLjAyNiAwLS4wMzlzLS4wMTcuMDA0LS4wMjcuMDA2Yy0uMDEzLjAwMy0uMDI2LjAwNi0uMDM5LjAwOC0uMDIxLjAwNS0uMDQyLjAwOS0uMDY0LjAxLS4wMi4wMDItLjA0Mi4wMDQtLjA2Mi4wMDUtLjAwNyAwLS4wMTUgMC0uMDIzIDBjLS4wMDYgMC0uMDE1IDAtLjAyMSAwLS4wMjMgMC0uMDM1LS4wMDMtLjA1Ny0uMDM2bC0uMDExLS4wMDYtLjAxNC0uMDA3LS4wMDUtLjAxNC0uMDM0LS4wMDUgMCAwIDAgMC0uMDAxIDBsLS4wMzMtLjAwMWMtLjAyNi0uMDA2LS4wNTQtLjAwOC0uMDgxLS4wMDctLjAxMyAwLS4wMjcgMC0uMDM5LS4wMDVsLS4wMDEtLjAwMS0uMDA1LS4wMDItLjAxNS0uMDAyLS4wNDUgMC0uMDY0IDAtLjA5Ny4wMDJsLS4wMjEuMDAxLS4wMi4wMDMtLjAxNi4wMDMtLjAxMiAwLS4wMTItLjAwMS0uMDExIDAtLjA1NS0uMDA4LS4wNTUtLjAwOC0uMDI3IDAtLjA1NC0uMDAzLS4wODktLjAwNWwuMDA1IDAuMDAxYy0uMDA1IDAtLjAxIDAtLjAxNSAwcy0uMDA3IDAtLjAxMy0uMDAycy0uMDExLS4wMDItLjAyMS0uMDAyYy0uMDA3IDAtLjAxNSAwLS4wMjIgMC0uMDA4IDAtLjAxNS0uMDAxLS4wMjQtLjAwM2wtLjAwNC0uMDAxLS4wMDItLjAwMS0uMDIzIDAtLjAyNSAwLS4wMjQtLjAwMS0uMDMyLS4wMDEtLjAzMSAwcy0uMDEyIDAtLjAxMiAwbC0uMDExLS4wMDMtLjAyMy0uMDA1LS4wMjItLjAwNC0uMDM1LS4wMDMtLjAyMy0uMDAxLS4wMTMgMC0uMDExIDAtLjAxMS0uMDAxbC0uMDEtLjAwMS0uMDEzIDAtLjAxMiAwLS4wMDktLjAwMS0uMDIxIDAtLjAzMy0uMDE4bC0uMDI0LS4wMjNsLS4wMDgtLjAxMS0uMDEzLS4wMi0uMDYtLjA3Yy0uMDU3LS4wODEtLjAzLS4yMDMuMDU5LS4yODRDMTcuMjcgMTAuNzEgMTUuMDgyIDkuMDQzIDEzLjY4IDguNjk5IDEyLjI3IDguMzYxIDEyIDguMzU2IDEyIDguMzU2eiIvPjwvc3ZnPg==');
+            background-size: contain;
+            background-repeat: no-repeat;
+            display: inline-block; /* 確保圖標可以跟按鈕水平排列 */
+        }
+
+        footer {
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+        }
+        /* 關鍵字掉落動畫 */
+        .keyword {
+            position: absolute;
+            top: -20px;
+            font-family: 'Courier New', monospace;
+            white-space: nowrap;
+            animation: fall 3s linear forwards; /* 使用 forwards 讓動畫結束時不跳回起始狀態 */
+            font-size: 1.2rem;
+        }
+
+        @keyframes fall {
+            from {
+                top: -20px;
+                opacity: 1;
+            }
+            to {
+                top: 100vh;
+                opacity: 0;
+            }
+        }
+
+
+        /* 針對手機螢幕的樣式調整 */
+        @media (max-width: 768px) {
+           header {
+              flex-direction: column;
+              align-items: center; /*讓手機版header的元素垂直居中*/
+            }
+           header h1 {
+                font-size: 1.5rem;
+                text-align: center;
+            }
+             .blog-link-container{
+                 flex-direction: column;
+                align-items: center;
+             }
+            .blog-link {
+                margin-left: 0;
+                margin-top: 5px; /*間距調整*/
+            }
+            .typing-text {
+                font-size: 2rem;
+            }
+            .typing-text-sm {
+                font-size: 1rem;
+                margin-bottom: 15px;
+            }
+            footer {
+              flex-direction: column;
+              text-align: center;
+              font-size: 0.8rem;
+            }
+            footer p:first-child{
+              margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+         <h1>Harrison</h1>
+         <div class="blog-link-container">
+        <a href="#" class="blog-link">我的博客 (正在開發中)</a>
+        <a href="#" class="blog-link">My Blog (Under Development)</a>
+        </div>
+    </header>
+    <main>
+        <div id="title-zh" class="typing-text"></div>
+        <div id="title-en" class="typing-text"></div>
+        <div id="desc-zh" class="typing-text-sm"></div>
+        <div id="desc-en" class="typing-text-sm"></div>
+       <div class="btn-container">
+         <a href="https://github.com/hrs-y" class="btn" target="_blank">View My GitHub<span class="github-icon"></span></a>
+        </div>
+    </main>
+    <footer>
+        <p>My GitHub: <a href="https://github.com/hrs-y" style="color: #D4D4D4;" target="_blank">https://github.com/hrs-y</a></p>
+        <p>© 2025 Harrison. All rights reserved.</p>
+    </footer>
+    <script>
+        const titleZh = "嗨，我是 Harrison，一位編碼愛好者";
+        const titleEn = "Hi, I'm Harrison, a Coding Enthusiast";
+        const descZh = "我是一位程序設計愛好者，正在探索 C++、Java 等各種技術。我喜歡用程式碼建構事物和解決問題。";
+        const descEn = "I am a programming enthusiast exploring various technologies like C++ and Java. I enjoy building things and solving problems with code.";
+
+        const titleZhElement = document.getElementById("title-zh");
+        const titleEnElement = document.getElementById("title-en");
+        const descZhElement = document.getElementById("desc-zh");
+        const descEnElement = document.getElementById("desc-en");
+        const main = document.querySelector('main');
+
+       const keywords = ["void", "int", "main", "include", "iostream", "std", "cout", "return", "if", "else", "for", "while", "class", "public", "private", "protected", "template", "using", "namespace", "char", "bool", "float", "double", "const", "switch", "case", "break", "try", "catch", "throw", "new", "delete", "virtual", "friend", "typedef", "enum", "struct", "union"];
+        const keywordColors = ["#FF4040", "#00FFFF", "#ADFF2F", "#FFFF00", "#BA55D3", "#A0522D","#00CED1", "#FF1493", "#FAFAD2", "#FF6347", "#87CEFA", "#98FB98", "#EE82EE", "#FFB6C1", "#90EE90", "#FFD700", "#00FF00", "#00BFFF", "#FF00FF", "#C0C0C0"];
+
+        function typeWriter(element, text, speed) {
+            let i = 0;
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }else{
+                  element.style.borderRight = 'none';
+                }
+            }
+            type();
+        }
+         function createFallingKeyword() {
+            const keyword = document.createElement('div');
+            keyword.classList.add('keyword');
+            keyword.textContent = keywords[Math.floor(Math.random() * keywords.length)];
+            keyword.style.left = `${Math.random() * 100}%`;
+            keyword.style.color = keywordColors[Math.floor(Math.random() * keywordColors.length)];
+            keyword.style.fontSize = `${Math.random() * 0.8 + 1}rem`; // 隨機調整字體大小
+             const animationDuration = Math.random() * 3 + 2; // 隨機調整動畫時間
+            keyword.style.animationDuration = `${animationDuration}s`;
+            keyword.style.animationDelay = `-${Math.random() * animationDuration}s`; // 添加隨機動畫延遲
+            main.appendChild(keyword);
+
+           keyword.addEventListener('animationend', () => {
+               keyword.remove();
+            });
+       }
+
+        typeWriter(titleZhElement, titleZh, 70);
+        setTimeout(() => {
+            typeWriter(titleEnElement, titleEn, 70);
+        }, titleZh.length * 70 + 100);
+        setTimeout(() => {
+            typeWriter(descZhElement, descZh, 50);
+        }, (titleZh.length + titleEn.length) * 70 + 100 + 200);
+        setTimeout(() => {
+            typeWriter(descEnElement, descEn, 50);
+        }, (titleZh.length + titleEn.length) * 70 + (descZh.length * 50) + 300 + 200);
+
+        setInterval(createFallingKeyword, 400);
+    </script>
+</body>
+</html>
