@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harrison's Portfolio</title>
+    <style>
+        /* 基礎樣式 */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1E1E1E;
+            color: #D4D4D4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* 頭部樣式 */
+        header {
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: clamp(1.5rem, 4vw, 2rem);
+        }
+
+        .blog-link-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .blog-link {
+            color: #D4D4D4;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .blog-link:hover {
+            color: #87CEFA;
+        }
+
+        /* 主要內容區域 */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: clamp(20px, 5vw, 40px);
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            box-sizing: border-box;
+        }
+
+        /* 打字效果文字 */
+        .typing-text {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: .15em solid #D4D4D4;
+            margin-bottom: 15px;
+            line-height: 1.4;
+            max-width: 90%;
+        }
+
+        .typing-text-sm {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            margin-bottom: 20px;
+            line-height: 1.4;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: .15em solid #D4D4D4;
+            max-width: 90%;
+        }
+
+        /* 按鈕樣式 */
+        .btn-container {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            background-color: #007ACC;
+            color: white;
+            padding: clamp(10px, 2vw, 15px) clamp(20px, 4vw, 30px);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            gap: 10px;
+        }
+
+        .btn:hover {
+            background-color: #005ea8;
+            transform: translateY(-2px);
+        }
+
+        .github-icon {
+            width: clamp(20px, 4vw, 24px);
+            height: clamp(20px, 4vw, 24px);
+            background-size: contain;
+            background-repeat: no-repeat;
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 8px;
+        }
+
+        /* 頁腳樣式 */
+        footer {
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: space-between;
+            font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        footer a {
+            color: #87CEFA;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #00BFFF;
+        }
+
+        /* 關鍵字掉落動畫 */
+        .keyword {
+            position: absolute;
+            top: -20px;
+            font-family: 'Courier New', monospace;
+            white-space: nowrap;
+            animation: fall 3s linear forwards;
+            font-size: clamp(0.8rem, 2vw, 1.2rem);
+            pointer-events: none;
+        }
+
+        @keyframes fall {
+            from {
+                top: -20px;
+                opacity: 1;
+            }
+            to {
+                top: 100vh;
+                opacity: 0;
+            }
+        }
+
+        /* 移動設備適配 */
+        @media (max-width: 768px) {
+            header {
+                justify-content: center;
+                text-align: center;
+            }
+
+            .blog-link-container {
+                justify-content: center;
+                width: 100%;
+            }
+
+            footer {
+                justify-content: center;
+                text-align: center;
+            }
+
+            footer p {
+                width: 100%;
+                margin: 5px 0;
+            }
+        }
+
+        /* 確保文字在小螢幕上不會溢出 */
+        @media (max-width: 480px) {
+            .typing-text, .typing-text-sm {
+                font-size: smaller;
+                padding: 0 10px;
+            }
+        }
+
+        /* 深色模式支援 */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #1E1E1E;
+                color: #D4D4D4;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Harrison</h1>
+        <div class="blog-link-container">
+            <a href="#" class="blog-link">我的博客 (正在開發中)</a>
+            <a href="#" class="blog-link">My Blog (Under Development)</a>
+        </div>
+    </header>
+    <main>
+        <div id="title-zh" class="typing-text"></div>
+        <div id="title-en" class="typing-text"></div>
+        <div id="desc-zh" class="typing-text-sm"></div>
+        <div id="desc-en" class="typing-text-sm"></div>
+        <div class="btn-container">
+            <a href="https://github.com/hrs-y" class="btn" target="_blank">
+                View My GitHub
+                <svg class="github-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white">
+                    <path d="M12 0.297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                </svg>
+            </a>
+        </div>
+    </main>
+    <footer>
+        <p>My GitHub: <a href="https://github.com/hrs-y" target="_blank">https://github.com/hrs-y</a></p>
+        <p>© 2025 Harrison. All rights reserved.</p>
+    </footer>
+    <script>
+        const titleZh = "嗨，我是 Harrison，一位編碼愛好者";
+        const titleEn = "Hi, I'm Harrison, a Coding Enthusiast";
+        const descZh = "我是一位程序設計愛好者，正在探索 C++、Java 等各種技術。我喜歡用程式碼建構事物和解決問題。";
+        const descEn = "I am a programming enthusiast exploring various technologies like C++ and Java. I enjoy building things and solving problems with code.";
+
+        const titleZhElement = document.getElementById("title-zh");
+        const titleEnElement = document.getElementById("title-en");
+        const descZhElement = document.getElementById("desc-zh");
+        const descEnElement = document.getElementById("desc-en");
+        const main = document.querySelector('main');
+
+        const keywords = ["void", "int", "main", "include", "iostream", "std", "cout", "return", "if", "else", "for", "while", "class", "public", "private", "protected", "template", "using", "namespace", "char", "bool", "float", "double", "const", "switch", "case", "break", "try", "catch", "throw", "new", "delete", "virtual", "friend", "typedef", "enum", "struct", "union"];
+        const keywordColors = ["#FF4040", "#00FFFF", "#ADFF2F", "#FFFF00", "#BA55D3", "#A0522D", "#00CED1", "#FF1493", "#FAFAD2", "#FF6347", "#87CEFA", "#98FB98", "#EE82EE", "#FFB6C1", "#90EE90", "#FFD700", "#00FF00", "#00BFFF", "#FF00FF", "#C0C0C0"];
+
+        function typeWriter(element, text, speed) {
+            let i = 0;
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                } else {
+                    element.style.borderRight = 'none';
+                }
+            }
+            type();
+        }
+
+        function createFallingKeyword() {
+            const keyword = document.createElement('div');
+            keyword.classList.add('keyword');
+            keyword.textContent = keywords[Math.floor(Math.random() * keywords.length)];
+            
+            // 根據螢幕寬度調整關鍵字位置
+            const containerWidth = main.offsetWidth;
+            const maxWidth = Math.min(containerWidth - 20, 200); // 限制最大寬度
+            const randomLeft = Math.random() * (containerWidth - maxWidth);
+            
+            keyword.style.left = `${randomLeft}px`;
+            keyword.style.color = keywordColors[Math.floor(Math.random() * keywordColors.length)];
+            
+            // 根據螢幕大小調整動畫時間和延遲
+            const animationDuration = Math.random() * 3 + 2;
+            keyword.style.animationDuration = `${animationDuration}s`;
+            keyword.style.animationDelay = `-${Math.random() * animationDuration}s`;
+            
+            main.appendChild(keyword);
+            
+            keyword.addEventListener('animationend', () => {
+                keyword.remove();
+            });
+        }
+
+        // 開始打字動畫
+        typeWriter(titleZhElement, titleZh, 70);
+        setTimeout(() => {
+            typeWriter(titleEnElement, titleEn, 70);
+        }, titleZh.length * 70 + 100);
+        
+        setTimeout(() => {
+            typeWriter(descZhElement, descZh, 50);
+        }, (titleZh.length + titleEn.length) * 70 + 300);
+        
+        setTimeout(() => {
+            typeWriter(descEnElement, descEn, 50);
+        }, (titleZh.length + titleEn.length) * 70 + (descZh.length * 50) + 500);
+
+        // 根據螢幕大小調整關鍵字生成頻率
+        const createKeywordInterval = window.innerWidth > 768 ? 400 : 800;
+        setInterval(createFallingKeyword, createKeywordInterval);
+    </script>
+</body>
+</html>
