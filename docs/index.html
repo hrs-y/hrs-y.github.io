@@ -1,19 +1,30 @@
-<script>
-        // 檢測移動設備並跳轉
-        function isMobileDevice() {
-            return (
-                navigator.userAgent.match(/Android/i) ||
-                navigator.userAgent.match(/webOS/i) ||
-                navigator.userAgent.match(/iPhone/i) ||
-                navigator.userAgent.match(/iPad/i) ||
-                navigator.userAgent.match(/iPod/i) ||
-                navigator.userAgent.match(/BlackBerry/i) ||
-                navigator.userAgent.match(/Windows Phone/i)
-            );
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+</head>
+<body>
+    <script>
+        // 檢測設備類型並進行跳轉
+        function detectDeviceAndRedirect() {
+            // 移動設備檢測
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone/i.test(navigator.userAgent);
+            
+            if (isMobile) {
+                // 移動設備跳轉
+                window.location.href = "https://hrs-y.github.io/phone";
+            } else {
+                // 桌面設備跳轉
+                window.location.href = "https://hrs-y.github.io/main.html";
+            }
         }
 
-        if (isMobileDevice()) {
-            window.location.href = "https://hrs-y.github.io/phone";
-        }
-
-        const titleZh = "嗨，我是 Harrison，一位編碼愛好者";
+        // 頁面加載時執行跳轉
+        window.onload = detectDeviceAndRedirect;
+        // 確保即使在 window.onload 之前也能執行
+        detectDeviceAndRedirect();
+    </script>
+</body>
+</html>
